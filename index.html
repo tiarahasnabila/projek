@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Anti-Bullying</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #e91e63;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+    }
+
+    .nav-links a:hover {
+      color: #e91e63;
+      background: rgba(233, 30, 99, 0.1);
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #e91e63, #f8bbd9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    .hero-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 3rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: bold;
+      background: linear-gradient(45deg, #e91e63, #9c27b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .stat-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #e91e63;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: #666;
+      font-weight: 500;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .feature-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #e91e63, #f8bbd9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .feature-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .feature-description {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: linear-gradient(45deg, #e91e63, #9c27b0);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 500;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid #e91e63;
+      color: #e91e63;
+    }
+
+    .btn-secondary:hover {
+      background: #e91e63;
+      color: white;
+    }
+
+    .emergency-section {
+      background: rgba(255, 87, 34, 0.1);
+      border: 2px solid #ff5722;
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .emergency-title {
+      color: #ff5722;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .emergency-btn {
+      background: #ff5722;
+      font-size: 1.1rem;
+      padding: 1rem 2rem;
+    }
+
+    .progress-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .progress-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    .progress-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: rgba(233, 30, 99, 0.05);
+      border-radius: 10px;
+    }
+
+    .progress-bar {
+      width: 200px;
+      height: 8px;
+      background: #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(45deg, #e91e63, #9c27b0);
+      transition: width 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .stats-grid, .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+      .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: relative; /* tambahkan ini */
+      }
+
+      .user-dropdown {
+        position: absolute;
+        top: 70px;
+        right: 30px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        display: none;
+        flex-direction: column;
+        min-width: 150px;
+        z-index: 101;
+        }
+
+      .user-dropdown a {
+        padding: 10px 15px;
+        text-decoration: none;
+        color: #333;
+        border-bottom: 1px solid #eee;
+        transition: background 0.3s;
+        }
+
+        .user-dropdown a:hover {
+          background-color: #f0f0f0;
+        }
+
+        .user-dropdown a:last-child {
+          border-bottom: none;
+        }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      🛡️ StopBullying
+    </div>
+    <ul class="nav-links">
+      <li><a href='index.html'>Beranda</a></li>
+      <li><a href='materi.html'>Materi</a></li>
+      <li><a href='game.html'>Game</a></li>
+      <li><a href='bantuan.html'>Bantuan</a></li>
+    </ul>
+
+    <div class="user-profile">
+    <span id="user-greeting">Halo,!</span>
+    <div class="profile-pic" id="profile-pic" onclick="toogleDropdown()"></div>
+    </div>
+
+     <div class="user-dropdown" id="user-dropdown">
+    <a href="#">Profil</a>
+    <a href="#" onclick="logout()">Keluar</a>
+    </div>
+
+  </nav>
+
+  <div class="container">
+    <section class="hero-section">
+      <h1 class="hero-title">Stop Bullying Sekarang!</h1>
+      <p class="hero-subtitle">Platform edukasi interaktif untuk mencegah dan mengatasi bullying di lingkungan sekolah</p>
+      <div style="margin-top: 2rem;">
+        <a href='materi.html' class="btn">📚 Mulai Belajar</a>
+        <a href="game.html" class="btn btn-secondary" style="margin-left: 1rem;">🎮 Main Games</a>
+      </div>
+    </section>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-number">1,247</div>
+        <div class="stat-label">Siswa Teredukasi</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-number">89%</div>
+        <div class="stat-label">Tingkat Kesadaran</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📋</div>
+        <div class="stat-number">156</div>
+        <div class="stat-label">Kasus Tertangani</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🤝</div>
+        <div class="stat-number">98%</div>
+        <div class="stat-label">Tingkat Resolusi</div>
+      </div>
+    </div>
+
+    <div class="emergency-section">
+      <h3 class="emergency-title">🆘 Butuh Bantuan Segera?</h3>
+      <p style="margin-bottom: 1rem;">Jika kamu atau temanmu sedang mengalami bullying, jangan ragu untuk mencari bantuan!</p>
+      <button class="btn emergency-btn" onclick="showEmergencyHelp()">Hubungi Bantuan Darurat</button>
+    </div>
+
+    <div class="progress-section">
+      <h3 class="progress-title">📊 Progress Belajarmu</h3>
+      <div class="progress-item">
+        <div>
+          <strong>Materi Dasar Anti-Bullying</strong>
+          <br><small>5 dari 8 modul selesai</small>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 62.5%"></div>
+        </div>
+      </div>
+      <div class="progress-item">
+        <div>
+          <strong>Kuis Interaktif</strong>
+          <br><small>3 dari 5 kuis selesai</small>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 60%"></div>
+        </div>
+      </div>
+      <div class="progress-item">
+        <div>
+          <strong>Simulasi Kasus</strong>
+          <br><small>2 dari 4 simulasi selesai</small>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 50%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">📖</div>
+          <h3 class="feature-title">Materi Edukasi</h3>
+        </div>
+        <p class="feature-description">
+          Pelajari berbagai jenis bullying, dampaknya, dan cara mengatasinya melalui materi interaktif yang mudah dipahami.
+        </p>
+        <a href='materi.html' class="btn">Mulai Belajar</a>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">🎮</div>
+          <h3 class="feature-title">Games Edukatif</h3>
+        </div>
+        <p class="feature-description">
+          Mainkan berbagai permainan seru yang mengajarkan cara mengatasi bullying sambil bersenang-senang.
+        </p>
+        <a href="game.html" class="btn">Main Sekarang</a>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">📝</div>
+          <h3 class="feature-title">Laporkan Bullying</h3>
+        </div>
+        <p class="feature-description">
+          Laporkan kasus bullying secara anonim dan aman. Tim kami akan membantu menangani masalahmu.
+        </p>
+        <a href="#laporan" class="btn">Buat Laporan</a>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">🤝</div>
+          <h3 class="feature-title">Konseling Online</h3>
+        </div>
+        <p class="feature-description">
+          Dapatkan dukungan dari konselor profesional melalui chat atau video call yang terjamin privasi.
+        </p>
+        <a href="bantuan.html" class="btn">Mulai Chat</a>
+      </div>
+
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">📊</div>
+          <h3 class="feature-title">Tracking Progress</h3>
+        </div>
+        <p class="feature-description">
+          Pantau perkembangan belajarmu dan lihat seberapa jauh pemahaman tentang anti-bullying yang sudah kamu capai.
+        </p>
+        <a href="#progress" class="btn">Lihat Progress</a>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">👨‍👩‍👧‍👦</div>
+          <h3 class="feature-title">Komunitas Support</h3>
+        </div>
+        <p class="feature-description">
+          Bergabung dengan komunitas siswa, guru, dan orang tua untuk saling mendukung dalam melawan bullying.
+        </p>
+        <a href="#komunitas" class="btn">Gabung Komunitas</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showEmergencyHelp() {
+      alert(`🆘 BANTUAN DARURAT 🆘
+
+📞 Hotline Anti-Bullying:
+• KPAI: 129
+• Telepon Darurat: 119
+• WhatsApp Konselor: 0812-3456-7890
+
+🏫 Hubungi:
+• Guru BK sekolah
+• Kepala sekolah
+• Orang tua/wali
+
+⚠️ Ingat: Kamu tidak sendirian!
+Tim kami siap membantu 24/7`);
+    }
+
+    // Animasi progress bar saat halaman dimuat
+    window.addEventListener('load', function() {
+      const progressBars = document.querySelectorAll('.progress-fill');
+      progressBars.forEach(bar => {
+        const width = bar.style.width;
+        bar.style.width = '0%';
+        setTimeout(() => {
+          bar.style.width = width;
+        }, 500);
+      });
+    });
+
+    // Smooth scrolling untuk navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+
+      // Ambil username yang login dari localStorage
+    const loggedInUser = localStorage.getItem('loggedInUser');
+
+    if (loggedInUser) {
+      // Update greeting
+      const greetingSpan = document.getElementById('user-greeting');
+      greetingSpan.textContent = `Halo, ${loggedInUser}!`;
+
+      // Update profile pic inisial (ambil huruf pertama)
+      const profilePic = document.getElementById('profile-pic');
+      profilePic.textContent = loggedInUser.charAt(0).toUpperCase();
+    } else {
+      // Kalau belum login, bisa redirect ke login page misalnya
+      window.location.href = 'login.html';
+    }
+
+      function toggleDropdown() {
+    const dropdown = document.getElementById("user-dropdown");
+    dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
+  }
+
+  function logout() {
+    localStorage.removeItem("userLogin");
+    window.location.href = "login.html";
+  }
+
+  // Tutup dropdown saat klik di luar lingkaran profil
+  window.onclick = function(event) {
+    const dropdown = document.getElementById("user-dropdown");
+    const profilePic = document.getElementById("profile-pic");
+
+    if (!profilePic.contains(event.target) && !dropdown.contains(event.target)) {
+      dropdown.style.display = "none";
+    }
+  }
+    });
+  </script>
+</body>
+</html>

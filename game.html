@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Games Edukatif - StopBullying</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #e91e63;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+    }
+
+    .nav-links a:hover {
+      color: #e91e63;
+      background: rgba(233, 30, 99, 0.1);
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #e91e63, #f8bbd9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 700px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 2rem 1rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(45deg, #e91e63, #9c27b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    #wordDisplay {
+      font-size: 2rem;
+      letter-spacing: 10px;
+      margin: 2rem 0;
+      user-select: none;
+      color: #9c27b0;
+    }
+
+    #message {
+      margin: 1rem 0;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #e91e63;
+      min-height: 1.5rem;
+      text-align: center;
+    }
+
+    #hint {
+      font-style: italic;
+      color: #555;
+      text-align: center;
+      margin-top: 5px;
+    }
+
+    .letters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .letter-btn {
+      background: linear-gradient(45deg, #e91e63, #9c27b0);
+      border: none;
+      color: white;
+      font-weight: bold;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s;
+    }
+
+    .letter-btn:disabled {
+      background: #ccc;
+      cursor: default;
+    }
+
+    .letter-btn:hover:not(:disabled) {
+      background: #f48fb1;
+    }
+
+    #resetBtn {
+      margin-top: 2rem;
+      padding: 0.8rem 2rem;
+      background: linear-gradient(45deg, #e91e63, #9c27b0);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    #resetBtn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+    }
+
+    #tries {
+      margin-top: 1rem;
+      font-size: 1rem;
+      color: #666;
+    }
+
+    @media (max-width: 480px) {
+      #wordDisplay {
+        font-size: 1.5rem;
+        letter-spacing: 6px;
+      }
+
+      .letter-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">🛡️ StopBullying</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="materi.html">Materi</a></li>
+      <li><a href="game.html">Game</a></li>
+      <li><a href="bantuan.html">Bantuan</a></li>
+    </ul>
+        <div class="user-profile">
+    <span id="user-greeting">Halo,!</span>
+    <div class="profile-pic" id="profile-pic">S</div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>🎮 Tebak Kata Anti-Bullying</h1>
+    <p>Isi huruf yang hilang untuk menyelesaikan kata. Yuk, belajar sambil bermain!</p>
+    <p id="hint"></p>
+
+    <div id="wordDisplay">_ _ _ _ _ _</div>
+    <div id="message"></div>
+    <div class="letters" id="lettersContainer"></div>
+    <div id="tries">Kesempatan tersisa: 6</div>
+    <button id="resetBtn">Main Lagi</button>
+  </div>
+
+<script>
+  const wordsWithHints = [
+    { word: "RESPEK", hint: "Sikap menghargai orang lain" },
+    { word: "TOLERANSI", hint: "Sikap menghormati perbedaan" },
+    { word: "SOPAN", hint: "Perilaku yang baik dan tidak kasar" },
+    { word: "KASIH", hint: "Perasaan sayang atau cinta" },
+    { word: "BANTU", hint: "Memberikan pertolongan" },
+    { word: "DAMAI", hint: "Keadaan tenang tanpa konflik" },
+    { word: "PEDULI", hint: "Sikap perhatian terhadap orang lain" },
+    { word: "SABAR", hint: "Tidak mudah marah atau menyerah" },
+    { word: "TOLERAN", hint: "Menerima perbedaan dengan lapang" },
+    { word: "JUJUR", hint: "Berkata dan bertindak apa adanya" }
+  ];
+
+  let selectedWord = "";
+  let guessedLetters = [];
+  let remainingTries = 6;
+  let score = 0;
+
+  const wordDisplay = document.getElementById("wordDisplay");
+  const message = document.getElementById("message");
+  const hintDisplay = document.getElementById("hint");
+  const lettersContainer = document.getElementById("lettersContainer");
+  const triesDisplay = document.getElementById("tries");
+  const resetBtn = document.getElementById("resetBtn");
+
+  // Buat elemen skor
+  const scoreDisplay = document.createElement("div");
+  scoreDisplay.style.marginTop = "1rem";
+  scoreDisplay.style.fontSize = "1.1rem";
+  scoreDisplay.style.fontWeight = "bold";
+  scoreDisplay.style.color = "#333";
+  lettersContainer.parentNode.insertBefore(scoreDisplay, lettersContainer);
+
+  function initGame() {
+    const randomItem = wordsWithHints[Math.floor(Math.random() * wordsWithHints.length)];
+    selectedWord = randomItem.word;
+    guessedLetters = [];
+    remainingTries = 6;
+    message.textContent = "";
+    triesDisplay.textContent = `Kesempatan tersisa: ${remainingTries}`;
+    hintDisplay.textContent = "Petunjuk: " + randomItem.hint;
+
+    // Pilih 2 huruf acak yang unik sebagai hint
+    const hintIndices = new Set();
+    while (hintIndices.size < 2) {
+      hintIndices.add(Math.floor(Math.random() * selectedWord.length));
+    }
+    guessedLetters = [...hintIndices].map(i => selectedWord[i]);
+
+    updateWordDisplay();
+    updateScore();
+    lettersContainer.innerHTML = "";
+
+    for (let i = 65; i <= 90; i++) {
+      const letter = String.fromCharCode(i);
+      const btn = document.createElement("button");
+      btn.textContent = letter;
+      btn.classList.add("letter-btn");
+
+      if (guessedLetters.includes(letter)) {
+        btn.disabled = true;
+      }
+
+      btn.addEventListener("click", () => handleGuess(letter));
+      lettersContainer.appendChild(btn);
+    }
+  }
+
+  function updateWordDisplay() {
+    const display = selectedWord.split('').map(l =>
+      guessedLetters.includes(l) ? l : "_"
+    ).join(" ");
+    wordDisplay.textContent = display;
+  }
+
+  function updateScore() {
+    scoreDisplay.textContent = `Skor: ${score}`;
+  }
+
+  function handleGuess(letter) {
+    if (guessedLetters.includes(letter) || remainingTries === 0) return;
+
+    guessedLetters.push(letter);
+
+    if (!selectedWord.includes(letter)) {
+      remainingTries--;
+      triesDisplay.textContent = `Kesempatan tersisa: ${remainingTries}`;
+      message.textContent = "Huruf salah!";
+    } else {
+      message.textContent = "Benar!";
+      score += 10;
+      updateScore();
+    }
+
+    updateWordDisplay();
+    updateButtons();
+    checkGameStatus();
+  }
+
+  function updateButtons() {
+    const buttons = lettersContainer.querySelectorAll("button");
+    buttons.forEach(btn => {
+      if (guessedLetters.includes(btn.textContent)) {
+        btn.disabled = true;
+      }
+    });
+  }
+
+  function checkGameStatus() {
+    const currentDisplay = wordDisplay.textContent.replace(/\s/g, "");
+    if (currentDisplay === selectedWord) {
+      message.textContent = "🎉 Selamat! Kamu menang!";
+      disableAllButtons();
+    } else if (remainingTries === 0) {
+      message.textContent = `😞 Kamu kalah! Kata yang benar: ${selectedWord}`;
+      disableAllButtons();
+      revealWord();
+    }
+  }
+
+  function disableAllButtons() {
+    const buttons = lettersContainer.querySelectorAll("button");
+    buttons.forEach(btn => btn.disabled = true);
+  }
+
+  function revealWord() {
+    wordDisplay.textContent = selectedWord.split('').join(" ");
+  }
+
+  resetBtn.addEventListener("click", initGame);
+
+  // Mulai game saat pertama kali halaman dibuka
+  initGame();
+
+  // Ambil username yang login dari localStorage
+    const loggedInUser = localStorage.getItem('loggedInUser');
+
+    if (loggedInUser) {
+      // Update greeting
+      const greetingSpan = document.getElementById('user-greeting');
+      greetingSpan.textContent = `Halo, ${loggedInUser}!`;
+
+      // Update profile pic inisial (ambil huruf pertama)
+      const profilePic = document.getElementById('profile-pic');
+      profilePic.textContent = loggedInUser.charAt(0).toUpperCase();
+    } else {
+      // Kalau belum login, bisa redirect ke login page misalnya
+      window.location.href = 'login.html';
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bantuan - StopBullying</title>
+  <style>
+    /* Styling umum */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #e91e63;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+    }
+
+    .nav-links a:hover {
+      color: #e91e63;
+      background: rgba(233, 30, 99, 0.1);
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #e91e63, #f8bbd9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 800px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 2rem 1rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      flex-grow: 1;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(45deg, #e91e63, #9c27b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    h2 {
+      margin-top: 2rem;
+      font-size: 1.5rem;
+      color: #e91e63;
+    }
+
+    p {
+      margin: 0.5rem 0;
+      line-height: 1.6;
+    }
+
+    ul {
+      margin-left: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .kontak-darurat {
+      background: #fce4ec;
+      border-left: 5px solid #e91e63;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+    }
+
+    .kontak-darurat p {
+      margin: 0.3rem 0;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">🛡️ StopBullying</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="materi.html">Materi</a></li>
+      <li><a href="game.html">Game</a></li>
+      <li><a href="bantuan.html">Bantuan</a></li>
+      
+    </ul>
+        <div class="user-profile">
+    <span id="user-greeting">Halo,!</span>
+    <div class="profile-pic" id="profile-pic">S</div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>🆘 Bantuan & Dukungan</h1>
+    <p>Halaman ini dirancang untuk membantumu menggunakan website dan memberikan dukungan jika kamu atau temanmu mengalami perundungan.</p>
+
+    <h2>🔍 Cara Menggunakan Website</h2>
+    <ul>
+      <li><strong>Beranda:</strong> Menampilkan informasi dan fitur utama.</li>
+      <li><strong>Materi:</strong> Membaca infografis, menonton video edukatif, dan mengikuti kuis.</li>
+      <li><strong>Game:</strong> Bermain sambil belajar tentang pentingnya menghargai sesama.</li>
+      <li><strong>Twibbon:</strong> Gunakan twibbon untuk menyuarakan gerakan anti-bullying!</li>
+    </ul>
+
+    <h2>📣 Jika Kamu Mengalami Perundungan</h2>
+    <p>Jangan diam! Kamu tidak sendiri. Jika kamu merasa terancam atau tidak nyaman:</p>
+    <ul>
+      <li>Bicaralah dengan guru, orang tua, atau orang dewasa yang kamu percaya.</li>
+      <li>Laporkan melalui kontak darurat berikut.</li>
+      <li>Ambil tangkapan layar (screenshot) sebagai bukti.</li>
+    </ul>
+
+    <div class="kontak-darurat">
+      <h2>📞 Kontak Darurat</h2>
+      <p><strong>Komnas Perlindungan Anak:</strong> 021-3190-2305</p>
+      <p><strong>Kominfo Aduan Konten:</strong> aduankonten.id / email: aduankonten@kominfo.go.id</p>
+      <p><strong>Telepon Darurat Nasional:</strong> 112</p>
+      <p><strong>BK Sekolah:</strong> Hubungi guru Bimbingan Konseling di sekolahmu.</p>
+    </div>
+
+    <p style="margin-top:2rem;">Kami di sini untuk mendukungmu. Jangan ragu untuk mencari bantuan kapan saja kamu membutuhkannya. 💪</p>
+  </div>
+
+  <script>
+    // Ambil username yang login dari localStorage
+    const loggedInUser = localStorage.getItem('loggedInUser');
+
+    if (loggedInUser) {
+      // Update greeting
+      const greetingSpan = document.getElementById('user-greeting');
+      greetingSpan.textContent = `Halo, ${loggedInUser}!`;
+
+      // Update profile pic inisial (ambil huruf pertama)
+      const profilePic = document.getElementById('profile-pic');
+      profilePic.textContent = loggedInUser.charAt(0).toUpperCase();
+    } else {
+      // Kalau belum login, bisa redirect ke login page misalnya
+      window.location.href = 'login.html';
+    }
+
+  </script>
+</body>
+</html>
