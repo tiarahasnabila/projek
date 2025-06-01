@@ -372,6 +372,13 @@
       overflow-y: auto;
     }
 
+    .modal-content {
+    max-width: 90vw;   /* tidak lebih dari 90% lebar layar */
+    width: auto;
+    margin: auto;
+    }
+
+
     .modal-header {
       background: linear-gradient(45deg, #e91e63, #9c27b0);
       color: white;
@@ -495,6 +502,17 @@
       .container {
         padding: 0 1rem;
       }
+      .video-container {
+        max-width: 100%;
+        width: 400px !important; /* paksa lebar maksimal */
+        margin: 0 auto;
+      }
+
+      .video-container video {
+        width: 100% !important; /* paksa video ikut lebar container */
+        height: auto !important;
+        display: block;
+      }
     }
   </style>
 </head>
@@ -532,16 +550,6 @@
     <div class="header-section">
       <h1 class="header-title">📚 Materi Edukasi Anti-Bullying</h1>
       <p>Pelajari berbagai aspek tentang bullying dan cara mengatasinya melalui materi interaktif yang mudah dipahami</p>
-    </div>
-
-    <!-- Quick Actions -->
-    <div class="quick-actions">
-      <h3>🚀 Aksi Cepat</h3>
-      <div class="action-buttons">
-        <button class="btn btn-primary" onclick="navigateToPage('games')">🎮 Main Games</button>
-        <button class="btn btn-secondary" onclick="navigateToPage('laporan')">📝 Buat Laporan</button>
-        <button class="btn btn-secondary" onclick="showEmergencyHelp()">🆘 Bantuan Darurat</button>
-      </div>
     </div>
 
     <div class="filter-section">
@@ -711,12 +719,8 @@
         <!-- Video Container -->
                 <div class="video-container">
                     <video class="video-player" controls preload="metadata">
-                        <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
-                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        <source src="assets/videobullying.mp4" type="video/mp4">
                         <!-- Fallback untuk browser yang tidak mendukung video -->
-                        <p>Browser Anda tidak mendukung pemutar video. 
-                           <a href="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4">Download video</a>
-                        </p>
                     </video>
                 </div>
         <div class="lesson-content">
@@ -901,41 +905,62 @@
 <!-- Modal 6 -->
 <div id="modal6" class="modal">
   <div class="modal-content">
+    
+    <!-- HEADER -->
     <div class="modal-header">
       <button class="close-btn">&times;</button>
-      <h2>Contoh Ilustrasi Bullying di Lingkungan Sekolah</h2>
-   <h3>🧍 Ilustrasi Fisik</h3>
-    <p>
-      Dika sering dipukul pelan, dijegal saat jalan, atau didorong di lorong sekolah oleh teman sekelas. Ini membuatnya trauma dan enggan masuk kelas.
-    </p>
+      <h2>🎬 Contoh Ilustrasi Bullying di Lingkungan Sekolah</h2>
+      <p>Ilustrasi Fisik, Verbal, dan Sosial dalam Kehidupan Sehari-hari</p>
+    </div>
 
-    <h3>🗣️ Ilustrasi Verbal</h3>
-    <p>
-      Lisa dipanggil dengan julukan mengejek seperti "gendut" atau "sipit" setiap hari. Hal ini melukai perasaan dan kepercayaan dirinya.
-    </p>
+    <!-- BODY -->
+    <div class="modal-body">
+      <div class="lesson-content">
 
-    <h3>🙅 Ilustrasi Sosial</h3>
-    <p>
-      Rafi tidak diajak bermain atau kerja kelompok. Teman-temannya sengaja menjauhi dan membicarakannya di belakang. Ia merasa sendirian dan tertekan.
-    </p>
+        <!-- Video -->
+        <div class="video-container" style="max-width: 600px; margin: 0 auto;">
+          <video class="video-player" controls preload="metadata" style="width: 100%; height: auto; border-radius: 8px;">
+            <source src="assets/animasi.mp4" type="video/mp4">
+            <p>Browser Anda tidak mendukung pemutar video.</p>
+          </video>
+        </div>
 
-    <h3>⚠️ Dampak</h3>
-    <ul>
-      <li>Menurunnya semangat belajar</li>
-      <li>Perubahan emosi & isolasi sosial</li>
-      <li>Risiko gangguan kesehatan mental</li>
-    </ul>
+        <!-- Teks -->
+        <h3>🧍 Ilustrasi Fisik</h3>
+        <p>
+          Dika sering dipukul pelan, dijegal saat jalan, atau didorong di lorong sekolah oleh teman sekelas. Ini membuatnya trauma dan enggan masuk kelas.
+        </p>
 
-    <h3>✅ Solusi</h3>
-    <ul>
-      <li>Bicarakan kepada guru atau konselor</li>
-      <li>Jangan membiarkan bullying terjadi di depanmu</li>
-      <li>Dukung teman yang jadi korban</li>
-    </ul>
+        <h3>🗣️ Ilustrasi Verbal</h3>
+        <p>
+          Lisa dipanggil dengan julukan mengejek seperti "gendut" atau "sipit" setiap hari. Hal ini melukai perasaan dan kepercayaan dirinya.
+        </p>
 
-    <p><strong>Ingat:</strong> Sekolah yang aman adalah tanggung jawab bersama. Jangan jadi pelaku atau penonton. Jadilah pelindung. 🙌</p>
+        <h3>🙅 Ilustrasi Sosial</h3>
+        <p>
+          Rafi tidak diajak bermain atau kerja kelompok. Teman-temannya sengaja menjauhi dan membicarakannya di belakang. Ia merasa sendirian dan tertekan.
+        </p>
+
+        <h3>⚠️ Dampak</h3>
+        <ul>
+          <li>Menurunnya semangat belajar</li>
+          <li>Perubahan emosi & isolasi sosial</li>
+          <li>Risiko gangguan kesehatan mental</li>
+        </ul>
+
+        <h3>✅ Solusi</h3>
+        <ul>
+          <li>Bicarakan kepada guru atau konselor</li>
+          <li>Jangan membiarkan bullying terjadi di depanmu</li>
+          <li>Dukung teman yang jadi korban</li>
+        </ul>
+
+        <p><strong>Ingat:</strong> Sekolah yang aman adalah tanggung jawab bersama. Jangan jadi pelaku atau penonton. Jadilah pelindung. 🙌</p>
+        
+      </div>
+    </div>
+    
   </div>
-</div>
 </div>
 
 <!-- SCRIPT JS UNTUK MODAL -->
@@ -1052,6 +1077,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Kalau belum login, redirect ke login page
     window.location.href = 'login.html';
   }
+
 });
 </script>
 
