@@ -20,6 +20,36 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* Floating hearts animation */
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(233, 30, 99, 0.3);
+      font-size: 20px;
+      animation: float 8s infinite linear;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
     }
 
     .navbar {
@@ -43,6 +73,12 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
 
     .nav-links {
@@ -55,14 +91,17 @@
       text-decoration: none;
       color: #333;
       font-weight: 500;
-      transition: color 0.3s;
+      transition: all 0.3s;
       padding: 0.5rem 1rem;
       border-radius: 25px;
+      position: relative;
+      overflow: hidden;
     }
 
     .nav-links a:hover {
       color: #e91e63;
       background: rgba(233, 30, 99, 0.1);
+      transform: translateY(-2px);
     }
 
     .user-profile {
@@ -81,16 +120,24 @@
       justify-content: center;
       color: white;
       font-weight: bold;
+      animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
     }
 
     .container {
-      max-width: 800px;
+      max-width: 1000px;
       background: rgba(255,255,255,0.95);
       border-radius: 20px;
       padding: 2rem;
       margin: 2rem 1rem;
       box-shadow: 0 10px 40px rgba(0,0,0,0.1);
       flex-grow: 1;
+      position: relative;
+      z-index: 10;
     }
 
     h1 {
@@ -100,41 +147,259 @@
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
       text-align: center;
+      animation: glow 2s ease-in-out infinite alternate;
     }
 
-    h2 {
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 5px rgba(233, 30, 99, 0.5)); }
+      to { filter: drop-shadow(0 0 20px rgba(233, 30, 99, 0.8)); }
+    }
+
+    .help-sections {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
       margin-top: 2rem;
-      font-size: 1.5rem;
+    }
+
+    .help-card {
+      background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%);
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .help-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(233, 30, 99, 0.2);
+      border-color: #e91e63;
+    }
+
+    .help-card h3 {
       color: #e91e63;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    p {
-      margin: 0.5rem 0;
-      line-height: 1.6;
+    .help-card .emoji {
+      font-size: 2rem;
+      animation: wiggle 1s ease-in-out infinite;
     }
 
-    ul {
-      margin-left: 1.5rem;
-      margin-top: 0.5rem;
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: rotate(3deg); }
     }
 
-    ul li {
-      margin-bottom: 0.5rem;
+    .konseling-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    .kontak-darurat {
-      background: #fce4ec;
-      border-left: 5px solid #e91e63;
+    .konseling-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.05) 10px,
+        rgba(255,255,255,0.05) 20px
+      );
+      animation: slide 20s linear infinite;
+    }
+
+    @keyframes slide {
+      0% { transform: translateX(-50px) translateY(-50px); }
+      100% { transform: translateX(50px) translateY(50px); }
+    }
+
+    .konseling-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .chat-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .chat-btn {
+      background: rgba(255,255,255,0.9);
+      color: #667eea;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .chat-btn:hover {
+      background: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    .emergency-contacts {
+      background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+      color: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      animation: emergencyPulse 3s infinite;
+    }
+
+    @keyframes emergencyPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+      50% { box-shadow: 0 0 0 20px rgba(255, 107, 107, 0); }
+    }
+
+    .contact-item {
+      background: rgba(255,255,255,0.2);
       padding: 1rem;
       border-radius: 10px;
-      margin-top: 2rem;
+      margin: 0.5rem 0;
+      transition: all 0.3s;
     }
 
-    .kontak-darurat p {
-      margin: 0.3rem 0;
+    .contact-item:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateX(10px);
     }
 
-    @media (max-width: 480px) {
+    .mood-tracker {
+      text-align: center;
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      border-radius: 15px;
+    }
+
+    .mood-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .mood-btn {
+      font-size: 2rem;
+      background: white;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .mood-btn:hover {
+      transform: scale(1.2) rotate(10deg);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+
+    .mood-btn.selected {
+      background: #e91e63;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .support-message {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 15px;
+      margin-top: 1rem;
+      display: none;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .chat-simulator {
+      background: white;
+      border-radius: 15px;
+      padding: 1rem;
+      margin-top: 1rem;
+      max-height: 300px;
+      overflow-y: auto;
+      border: 2px solid #e91e63;
+      display: none;
+    }
+
+    .chat-message {
+      padding: 0.5rem 1rem;
+      margin: 0.5rem 0;
+      border-radius: 15px;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-20px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .message-konselor {
+      background: #e3f2fd;
+      margin-right: 2rem;
+    }
+
+    .message-user {
+      background: #e91e63;
+      color: white;
+      margin-left: 2rem;
+      text-align: right;
+    }
+
+    @media (max-width: 768px) {
+      .help-sections {
+        grid-template-columns: 1fr;
+      }
+      
+      .chat-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .mood-buttons {
+        flex-wrap: wrap;
+      }
+      
       h1 {
         font-size: 2rem;
       }
@@ -142,6 +407,8 @@
   </style>
 </head>
 <body>
+  <div class="floating-hearts" id="floating-hearts"></div>
+  
   <nav class="navbar">
     <div class="logo">🛡️ StopBullying</div>
     <ul class="nav-links">
@@ -149,47 +416,241 @@
       <li><a href="materi.html">Materi</a></li>
       <li><a href="game.html">Game</a></li>
       <li><a href="bantuan.html">Bantuan</a></li>
-      
     </ul>
-        <div class="user-profile">
+
+   <div class="user-profile">
     <span id="user-greeting">Halo,!</span>
-    <div class="profile-pic" id="profile-pic">S</div>
+    <div class="profile-pic" id="profile-pic" onclick="toogleDropdown()"></div>
     </div>
   </nav>
 
   <div class="container">
     <h1>🆘 Bantuan & Dukungan</h1>
-    <p>Halaman ini dirancang untuk membantumu menggunakan website dan memberikan dukungan jika kamu atau temanmu mengalami perundungan.</p>
+    <p style="text-align: center; font-size: 1.1rem; margin-bottom: 2rem;">
+      Kamu tidak sendirian! Kami di sini untuk membantu dan mendukungmu. 💪✨
+    </p>
 
-    <h2>🔍 Cara Menggunakan Website</h2>
-    <ul>
-      <li><strong>Beranda:</strong> Menampilkan informasi dan fitur utama.</li>
-      <li><strong>Materi:</strong> Membaca infografis, menonton video edukatif, dan mengikuti kuis.</li>
-      <li><strong>Game:</strong> Bermain sambil belajar tentang pentingnya menghargai sesama.</li>
-      <li><strong>Twibbon:</strong> Gunakan twibbon untuk menyuarakan gerakan anti-bullying!</li>
-    </ul>
-
-    <h2>📣 Jika Kamu Mengalami Perundungan</h2>
-    <p>Jangan diam! Kamu tidak sendiri. Jika kamu merasa terancam atau tidak nyaman:</p>
-    <ul>
-      <li>Bicaralah dengan guru, orang tua, atau orang dewasa yang kamu percaya.</li>
-      <li>Laporkan melalui kontak darurat berikut.</li>
-      <li>Ambil tangkapan layar (screenshot) sebagai bukti.</li>
-    </ul>
-
-    <div class="kontak-darurat">
-      <h2>📞 Kontak Darurat</h2>
-      <p><strong>Komnas Perlindungan Anak:</strong> 021-3190-2305</p>
-      <p><strong>Kominfo Aduan Konten:</strong> aduankonten.id / email: aduankonten@kominfo.go.id</p>
-      <p><strong>Telepon Darurat Nasional:</strong> 112</p>
-      <p><strong>BK Sekolah:</strong> Hubungi guru Bimbingan Konseling di sekolahmu.</p>
+    <!-- Mood Tracker -->
+    <div class="mood-tracker">
+      <h3>🌈 Bagaimana perasaanmu hari ini?</h3>
+      <div class="mood-buttons">
+        <button class="mood-btn" data-mood="very-happy" title="Sangat Bahagia">😄</button>
+        <button class="mood-btn" data-mood="happy" title="Bahagia">😊</button>
+        <button class="mood-btn" data-mood="okay" title="Biasa Saja">😐</button>
+        <button class="mood-btn" data-mood="sad" title="Sedih">😢</button>
+        <button class="mood-btn" data-mood="very-sad" title="Sangat Sedih">😭</button>
+      </div>
+      <div class="support-message" id="support-message"></div>
     </div>
 
-    <p style="margin-top:2rem;">Kami di sini untuk mendukungmu. Jangan ragu untuk mencari bantuan kapan saja kamu membutuhkannya. 💪</p>
+    <!-- Konseling Online Section -->
+    <div class="konseling-section">
+      <div class="konseling-content">
+        <h2 style="font-size: 2rem; margin-bottom: 1rem;">💬 Konseling Online</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+          Dapatkan dukungan dari konselor profesional melalui chat atau video call yang terjamin privasi dan keamanannya
+        </p>
+        <div class="chat-buttons">
+          <button class="chat-btn" onclick="startChat()">
+            💬 Mulai Chat dengan Konselor
+          </button>
+          <button class="chat-btn" onclick="startVideoCall()">
+            📹 Video Call Konseling
+          </button>
+          <button class="chat-btn" onclick="scheduleAppointment()">
+            📅 Jadwalkan Konseling
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Simulator -->
+    <div class="chat-simulator" id="chat-simulator">
+      <div id="chat-messages"></div>
+    </div>
+
+    <!-- Help Sections -->
+    <div class="help-sections">
+      <div class="help-card" onclick="showWebsiteGuide()">
+        <h3><span class="emoji">🔍</span> Panduan Website</h3>
+        <p>Pelajari cara menggunakan semua fitur website StopBullying dengan mudah dan menyenangkan!</p>
+      </div>
+
+      <div class="help-card" onclick="showBullyingHelp()">
+        <h3><span class="emoji">🛡️</span> Bantuan Perundungan</h3>
+        <p>Langkah-langkah praktis dan tips untuk menghadapi situasi perundungan dengan bijak.</p>
+      </div>
+
+      <div class="help-card" onclick="showSupportGroup()">
+        <h3><span class="emoji">👥</span> Grup Dukungan</h3>
+        <p>Bergabung dengan komunitas teman-teman yang saling mendukung dan berbagi pengalaman positif.</p>
+      </div>
+
+      <div class="help-card" onclick="showResources()">
+        <h3><span class="emoji">📚</span> Sumber Daya</h3>
+        <p>Akses ke artikel, video, dan materi edukatif tentang pencegahan perundungan.</p>
+      </div>
+    </div>
+
+    <!-- Emergency Contacts -->
+    <div class="emergency-contacts">
+      <h2 style="margin-bottom: 1rem;">🚨 Kontak Darurat</h2>
+      <div class="contact-item">
+        <strong>📞 Komnas Perlindungan Anak:</strong> 021-3190-2305
+      </div>
+      <div class="contact-item">
+        <strong>💻 Kominfo Aduan Konten:</strong> aduankonten.id
+      </div>
+      <div class="contact-item">
+        <strong>🆘 Telepon Darurat Nasional:</strong> 112
+      </div>
+      <div class="contact-item">
+        <strong>🎓 BK Sekolah:</strong> Hubungi guru Bimbingan Konseling
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 2rem; padding: 1rem; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); border-radius: 15px;">
+      <p style="font-size: 1.2rem; font-weight: bold; color: #333;">
+        🌟 Ingat, kamu berharga dan layak mendapat kebahagiaan! 🌟
+      </p>
+    </div>
   </div>
 
   <script>
-    // Ambil username yang login dari localStorage
+    // Floating hearts animation
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '💖';
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDuration = Math.random() * 3 + 5 + 's';
+      document.getElementById('floating-hearts').appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }
+
+    setInterval(createHeart, 2000);
+
+    // User profile handling
+    const loggedInUser = 'Siswa'; // Temporary fallback
+    
+    if (loggedInUser) {
+      document.getElementById('user-greeting').textContent = `Halo, ${loggedInUser}!`;
+      document.getElementById('profile-pic').textContent = loggedInUser.charAt(0).toUpperCase();
+    }
+
+    // Mood tracker
+    const moodButtons = document.querySelectorAll('.mood-btn');
+    const supportMessage = document.getElementById('support-message');
+
+    const moodMessages = {
+      'very-happy': '🎉 Wah, senang sekali melihatmu bahagia! Terus jaga semangat positifmu ya!',
+      'happy': '😊 Bagus! Semoga kebahagiaan ini terus berlanjut sepanjang hari!',
+      'okay': '👍 Hari yang biasa saja juga tidak apa-apa. Semoga besok lebih cerah!',
+      'sad': '🤗 Kami memahami perasaanmu. Ingat, perasaan sedih itu wajar dan akan berlalu.',
+      'very-sad': '💗 Kamu tidak sendirian. Tim konselor kami siap membantu kapan saja kamu butuhkan.'
+    };
+
+    moodButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        moodButtons.forEach(btn => btn.classList.remove('selected'));
+        button.classList.add('selected');
+        
+        const mood = button.dataset.mood;
+        supportMessage.innerHTML = moodMessages[mood];
+        supportMessage.style.display = 'block';
+        
+        if (mood === 'sad' || mood === 'very-sad') {
+          supportMessage.innerHTML += '<br><br>💬 <strong>Mau bicara dengan konselor sekarang?</strong>';
+          setTimeout(() => {
+            if (confirm('Apakah kamu ingin berbicara dengan konselor sekarang?')) {
+              startChat();
+            }
+          }, 2000);
+        }
+      });
+    });
+
+    // Chat functions
+    const chatMessages = [
+      { sender: 'konselor', text: 'Halo! Saya konselor Sarah. Bagaimana kabarmu hari ini?' },
+      { sender: 'user', text: 'Halo kak, saya merasa tidak nyaman di sekolah.' },
+      { sender: 'konselor', text: 'Terima kasih sudah mau bercerita. Bisakah kamu jelaskan lebih detail apa yang membuatmu tidak nyaman?' },
+      { sender: 'user', text: 'Ada teman yang sering mengejek saya...' },
+      { sender: 'konselor', text: 'Saya memahami betapa sulitnya situasi ini untukmu. Kamu sudah berani dengan menceritakannya. Mari kita cari solusi bersama.' }
+    ];
+
+    function startChat() {
+      const chatSimulator = document.getElementById('chat-simulator');
+      const chatMessagesDiv = document.getElementById('chat-messages');
+      
+      chatSimulator.style.display = 'block';
+      chatMessagesDiv.innerHTML = '';
+      
+      let messageIndex = 0;
+      
+      function addMessage() {
+        if (messageIndex < chatMessages.length) {
+          const message = chatMessages[messageIndex];
+          const messageDiv = document.createElement('div');
+          messageDiv.className = `chat-message message-${message.sender}`;
+          messageDiv.textContent = message.text;
+          chatMessagesDiv.appendChild(messageDiv);
+          
+          messageIndex++;
+          setTimeout(addMessage, 2000);
+        } else {
+          const finalMessage = document.createElement('div');
+          finalMessage.className = 'chat-message message-konselor';
+          finalMessage.innerHTML = '<strong>Untuk konseling sungguhan, silakan hubungi nomor darurat atau jadwalkan sesi konseling. Kami selalu siap membantu! 💝</strong>';
+          chatMessagesDiv.appendChild(finalMessage);
+        }
+      }
+      
+      setTimeout(addMessage, 1000);
+    }
+
+    function startVideoCall() {
+      alert('🎥 Fitur video call akan segera tersedia! Sementara ini, kamu bisa menggunakan chat konseling atau menghubungi nomor darurat. 📞');
+    }
+
+    function scheduleAppointment() {
+      alert('📅 Untuk jadwalkan konseling, silakan hubungi nomor BK sekolah atau Komnas Perlindungan Anak. Tim kami akan membantu mengatur jadwal yang sesuai untukmu! ⭐');
+    }
+
+    // Help card functions
+    function showWebsiteGuide() {
+      alert('🔍 Panduan Website:\n\n📍 Beranda: Informasi utama dan fitur terbaru\n📚 Materi: Video edukatif dan kuis interaktif\n🎮 Game: Permainan edukatif yang seru\n🆘 Bantuan: Dukungan dan konseling\n\nSelamat menjelajahi! ✨');
+    }
+
+    function showBullyingHelp() {
+      alert('🛡️ Tips Menghadapi Perundungan:\n\n1. Jangan diam, ceritakan pada orang dewasa\n2. Dokumentasikan kejadian (screenshot/foto)\n3. Hindari membalas dengan kekerasan\n4. Cari dukungan dari teman dan keluarga\n5. Laporkan ke pihak yang berwenang\n\nKamu kuat dan berharga! 💪');
+    }
+
+    function showSupportGroup() {
+      alert('👥 Grup Dukungan StopBullying:\n\n✨ Bergabung dengan teman-teman yang peduli\n💬 Sharing pengalaman dan solusi\n🤝 Saling mendukung dan menguatkan\n📱 Platform online yang aman\n\nBersama kita lebih kuat! 🌟');
+    }
+
+    function showResources() {
+      alert('📚 Sumber Daya Tersedia:\n\n📹 Video edukatif anti-bullying\n📖 Artikel dan tips praktis\n🎯 Kuis interaktif\n🎮 Game edukatif\n📞 Kontak bantuan darurat\n\nSemua gratis dan mudah diakses! 🎉');
+    }
+
+    // Add some interactive effects
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add click sound effect (visual feedback)
+      const buttons = document.querySelectorAll('button, .help-card');
+      buttons.forEach(button => {
+        button.addEventListener('click', function() {
+          this.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            this.style.transform = '';
+          }, 150);
+        });
+      });
+      
+       // Ambil username yang login dari localStorage
     const loggedInUser = localStorage.getItem('loggedInUser');
 
     if (loggedInUser) {
@@ -205,6 +666,7 @@
       window.location.href = 'login.html';
     }
 
+    });
   </script>
 </body>
 </html>

@@ -104,12 +104,34 @@
       text-align: center;
     }
 
+    .category-info {
+      background: linear-gradient(45deg, #e3f2fd, #f3e5f5);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      border-left: 4px solid #e91e63;
+    }
+
+    .category-title {
+      font-weight: bold;
+      color: #9c27b0;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .category-desc {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
     #wordDisplay {
       font-size: 2rem;
       letter-spacing: 10px;
       margin: 2rem 0;
       user-select: none;
       color: #9c27b0;
+      font-weight: bold;
     }
 
     #message {
@@ -126,6 +148,10 @@
       color: #555;
       text-align: center;
       margin-top: 5px;
+      background: #f8f9fa;
+      padding: 0.8rem;
+      border-radius: 8px;
+      border-left: 3px solid #17a2b8;
     }
 
     .letters {
@@ -146,20 +172,29 @@
       border-radius: 8px;
       cursor: pointer;
       user-select: none;
-      transition: background 0.3s;
+      transition: all 0.3s;
     }
 
     .letter-btn:disabled {
       background: #ccc;
       cursor: default;
+      transform: scale(0.9);
     }
 
     .letter-btn:hover:not(:disabled) {
-      background: #f48fb1;
+      background: linear-gradient(45deg, #f48fb1, #ce93d8);
+      transform: translateY(-2px);
     }
 
-    #resetBtn {
+    .game-controls {
+      display: flex;
+      gap: 1rem;
       margin-top: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
       padding: 0.8rem 2rem;
       background: linear-gradient(45deg, #e91e63, #9c27b0);
       color: white;
@@ -167,18 +202,81 @@
       border-radius: 25px;
       font-weight: 500;
       cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: all 0.3s;
     }
 
-    #resetBtn:hover {
+    .btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
     }
 
-    #tries {
+    .btn-secondary {
+      background: linear-gradient(45deg, #17a2b8, #20c997);
+    }
+
+    .btn-secondary:hover {
+      box-shadow: 0 5px 15px rgba(23, 162, 184, 0.4);
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
       margin-top: 1rem;
-      font-size: 1rem;
+      gap: 1rem;
+    }
+
+    .stat-box {
+      background: #f8f9fa;
+      padding: 0.8rem;
+      border-radius: 8px;
+      text-align: center;
+      flex: 1;
+      border: 2px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .stat-box.highlight {
+      border-color: #e91e63;
+      background: #ffeef3;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
       color: #666;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-value {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    .completion-message {
+      background: linear-gradient(45deg, #d4edda, #c3e6cb);
+      border: 1px solid #c3e6cb;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1rem;
+      text-align: center;
+      color: #155724;
+    }
+
+    .progress-indicator {
+      width: 100%;
+      height: 8px;
+      background: #e9ecef;
+      border-radius: 4px;
+      margin: 1rem 0;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(45deg, #e91e63, #9c27b0);
+      border-radius: 4px;
+      transition: width 0.5s ease;
     }
 
     @media (max-width: 480px) {
@@ -192,6 +290,19 @@
         height: 30px;
         font-size: 0.9rem;
       }
+
+      .stats-container {
+        flex-direction: column;
+      }
+
+      .game-controls {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -204,76 +315,231 @@
       <li><a href="game.html">Game</a></li>
       <li><a href="bantuan.html">Bantuan</a></li>
     </ul>
-        <div class="user-profile">
+
+    <div class="user-profile">
     <span id="user-greeting">Halo,!</span>
-    <div class="profile-pic" id="profile-pic">S</div>
+    <div class="profile-pic" id="profile-pic" onclick="toogleDropdown()"></div>
     </div>
   </nav>
 
   <div class="container">
     <h1>🎮 Tebak Kata Anti-Bullying</h1>
-    <p>Isi huruf yang hilang untuk menyelesaikan kata. Yuk, belajar sambil bermain!</p>
-    <p id="hint"></p>
+    <p>Isi huruf yang hilang untuk menyelesaikan kata. Yuk, belajar sambil bermain berdasarkan materi anti-bullying!</p>
+    
+    <div class="category-info" id="categoryInfo">
+      <div class="category-title" id="categoryTitle">Memuat...</div>
+      <div class="category-desc" id="categoryDesc">Persiapkan diri untuk belajar!</div>
+    </div>
 
+    <div class="progress-indicator">
+      <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+    </div>
+
+    <div id="hint"></div>
     <div id="wordDisplay">_ _ _ _ _ _</div>
     <div id="message"></div>
+    
     <div class="letters" id="lettersContainer"></div>
-    <div id="tries">Kesempatan tersisa: 6</div>
-    <button id="resetBtn">Main Lagi</button>
+    
+    <div class="stats-container">
+      <div class="stat-box">
+        <div class="stat-label">Skor</div>
+        <div class="stat-value" id="scoreValue">0</div>
+      </div>
+      <div class="stat-box" id="triesBox">
+        <div class="stat-label">Kesempatan</div>
+        <div class="stat-value" id="triesValue">6</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Level</div>
+        <div class="stat-value" id="levelValue">1</div>
+      </div>
+    </div>
+
+    <div class="game-controls">
+      <button class="btn" id="resetBtn">Main Lagi</button>
+      <button class="btn btn-secondary" id="nextCategoryBtn">Ganti Kategori</button>
+    </div>
+
+    <div id="completionMessage" class="completion-message" style="display: none;">
+      <h3>🎉 Selamat!</h3>
+      <p>Kamu telah menyelesaikan kata dari materi anti-bullying. Terus belajar untuk menjadi agen perubahan!</p>
+    </div>
   </div>
 
 <script>
-  const wordsWithHints = [
-    { word: "RESPEK", hint: "Sikap menghargai orang lain" },
-    { word: "TOLERANSI", hint: "Sikap menghormati perbedaan" },
-    { word: "SOPAN", hint: "Perilaku yang baik dan tidak kasar" },
-    { word: "KASIH", hint: "Perasaan sayang atau cinta" },
-    { word: "BANTU", hint: "Memberikan pertolongan" },
-    { word: "DAMAI", hint: "Keadaan tenang tanpa konflik" },
-    { word: "PEDULI", hint: "Sikap perhatian terhadap orang lain" },
-    { word: "SABAR", hint: "Tidak mudah marah atau menyerah" },
-    { word: "TOLERAN", hint: "Menerima perbedaan dengan lapang" },
-    { word: "JUJUR", hint: "Berkata dan bertindak apa adanya" }
+  // Data kata berdasarkan 6 materi anti-bullying
+  const materiCategories = [
+    {
+      name: "Apa itu Bullying?",
+      description: "Pemahaman Dasar tentang Bullying",
+      icon: "📖",
+      words: [
+        { word: "BULLYING", hint: "Perilaku agresif yang berulang terhadap orang yang lebih lemah" },
+        { word: "AGRESIF", hint: "Sifat menyerang atau bersikap kasar" },
+        { word: "BERULANG", hint: "Terjadi secara terus-menerus, bukan hanya sekali" },
+        { word: "DISENGAJA", hint: "Dilakukan dengan sengaja untuk menyakiti" },
+        { word: "LEMAH", hint: "Kondisi korban yang dianggap tidak berdaya" },
+        { word: "KONFLIK", hint: "Pertentangan yang berbeda dengan bullying" },
+        { word: "KORBAN", hint: "Orang yang menjadi sasaran bullying" },
+        { word: "PELAKU", hint: "Orang yang melakukan tindakan bullying" }
+      ]
+    },
+    {
+      name: "Jenis-jenis Bullying",
+      description: "Fisik, Verbal, dan Cyber",
+      icon: "👥",
+      words: [
+        { word: "FISIK", hint: "Jenis bullying yang melibatkan kontak tubuh" },
+        { word: "VERBAL", hint: "Bullying menggunakan kata-kata menyakitkan" },
+        { word: "RELASIONAL", hint: "Bullying yang merusak hubungan sosial" },
+        { word: "CYBER", hint: "Bullying yang terjadi di dunia digital" },
+        { word: "MEMUKUL", hint: "Contoh bullying fisik dengan tangan" },
+        { word: "MENGEJEK", hint: "Contoh bullying verbal yang merendahkan" },
+        { word: "MENGUCILKAN", hint: "Tindakan mengeluarkan dari kelompok" },
+        { word: "ONLINE", hint: "Platform tempat cyberbullying terjadi" }
+      ]
+    },
+    {
+      name: "Dampak Bullying",
+      description: "Efek Psikologis dan Sosial",
+      icon: "💔",
+      words: [
+        { word: "TRAUMA", hint: "Luka batin akibat pengalaman menyakitkan" },
+        { word: "DEPRESI", hint: "Gangguan mental berupa kesedihan mendalam" },
+        { word: "CEMAS", hint: "Perasaan khawatir dan takut berlebihan" },
+        { word: "ISOLASI", hint: "Keadaan terpisah dari lingkungan sosial" },
+        { word: "AKADEMIK", hint: "Bidang yang terpengaruh akibat bullying di sekolah" },
+        { word: "PERCAYA", hint: "Rasa yakin pada diri sendiri yang menurun" },
+        { word: "TIDUR", hint: "Aktivitas yang terganggu akibat stress" },
+        { word: "NAFSU", hint: "Keinginan makan yang berubah karena stress" }
+      ]
+    },
+    {
+      name: "Cara Menghadapi Bullying",
+      description: "Strategi Perlindungan Diri",
+      icon: "🛡️",
+      words: [
+        { word: "TEGAS", hint: "Sikap yang perlu ditunjukkan saat menghadapi bullying" },
+        { word: "LAPOR", hint: "Tindakan memberitahu pihak berwenang" },
+        { word: "HINDARI", hint: "Cara menjauh dari situasi berbahaya" },
+        { word: "DUKUNGAN", hint: "Bantuan dari orang lain yang diperlukan korban" },
+        { word: "GURU", hint: "Pihak di sekolah yang bisa dimintai bantuan" },
+        { word: "ORANGTUA", hint: "Keluarga yang harus diberitahu tentang bullying" },
+        { word: "AMAN", hint: "Kondisi yang harus diciptakan untuk korban" },
+        { word: "MELAWAN", hint: "Yang TIDAK boleh dilakukan dengan kekerasan" }
+      ]
+    },
+    {
+      name: "Menjadi Bystander Positif",
+      description: "Membantu Korban Bullying",
+      icon: "🤝",
+      words: [
+        { word: "BYSTANDER", hint: "Orang yang menyaksikan bullying terjadi" },
+        { word: "POSITIF", hint: "Jenis bystander yang membantu korban" },
+        { word: "MEMBANTU", hint: "Tindakan yang dilakukan bystander positif" },
+        { word: "MELINDUNGI", hint: "Upaya menjaga korban dari bahaya" },
+        { word: "INKLUSIF", hint: "Sifat lingkungan yang menerima semua orang" },
+        { word: "SEMANGAT", hint: "Yang diberikan kepada korban bullying" },
+        { word: "MENDENGAR", hint: "Cara memberikan dukungan kepada korban" },
+        { word: "PERUBAHAN", hint: "Yang bisa diciptakan oleh bystander positif" }
+      ]
+    },
+    {
+      name: "Cyberbullying",
+      description: "Bullying di Era Digital",
+      icon: "💻",
+      words: [
+        { word: "DIGITAL", hint: "Era teknologi tempat cyberbullying terjadi" },
+        { word: "MEDSOS", hint: "Platform utama tempat cyberbullying" },
+        { word: "PRIVASI", hint: "Hak yang harus dijaga di dunia maya" },
+        { word: "BLOKIR", hint: "Tindakan untuk menghentikan pelaku cyber" },
+        { word: "BUKTI", hint: "Yang harus disimpan saat mengalami cyberbullying" },
+        { word: "AKUN", hint: "Yang dibuat palsu untuk cyberbullying" },
+        { word: "FOTO", hint: "Yang disebarkan tanpa izin dalam cyberbullying" },
+        { word: "PLATFORM", hint: "Tempat melaporkan cyberbullying" }
+      ]
+    }
   ];
 
+  let currentCategoryIndex = 0;
+  let currentWordIndex = 0;
   let selectedWord = "";
   let guessedLetters = [];
   let remainingTries = 6;
   let score = 0;
+  let level = 1;
+  let completedWords = 0;
 
   const wordDisplay = document.getElementById("wordDisplay");
   const message = document.getElementById("message");
   const hintDisplay = document.getElementById("hint");
   const lettersContainer = document.getElementById("lettersContainer");
-  const triesDisplay = document.getElementById("tries");
+  const triesValue = document.getElementById("triesValue");
+  const scoreValue = document.getElementById("scoreValue");
+  const levelValue = document.getElementById("levelValue");
+  const triesBox = document.getElementById("triesBox");
   const resetBtn = document.getElementById("resetBtn");
+  const nextCategoryBtn = document.getElementById("nextCategoryBtn");
+  const categoryTitle = document.getElementById("categoryTitle");
+  const categoryDesc = document.getElementById("categoryDesc");
+  const progressFill = document.getElementById("progressFill");
+  const completionMessage = document.getElementById("completionMessage");
 
-  // Buat elemen skor
-  const scoreDisplay = document.createElement("div");
-  scoreDisplay.style.marginTop = "1rem";
-  scoreDisplay.style.fontSize = "1.1rem";
-  scoreDisplay.style.fontWeight = "bold";
-  scoreDisplay.style.color = "#333";
-  lettersContainer.parentNode.insertBefore(scoreDisplay, lettersContainer);
+  function updateCategoryInfo() {
+    const category = materiCategories[currentCategoryIndex];
+    categoryTitle.textContent = `${category.icon} ${category.name}`;
+    categoryDesc.textContent = category.description;
+  }
+
+  function updateProgress() {
+    const category = materiCategories[currentCategoryIndex];
+    const progress = ((currentWordIndex + 1) / category.words.length) * 100;
+    progressFill.style.width = `${progress}%`;
+  }
 
   function initGame() {
-    const randomItem = wordsWithHints[Math.floor(Math.random() * wordsWithHints.length)];
-    selectedWord = randomItem.word;
+    const category = materiCategories[currentCategoryIndex];
+    const wordData = category.words[currentWordIndex];
+    
+    selectedWord = wordData.word;
     guessedLetters = [];
     remainingTries = 6;
     message.textContent = "";
-    triesDisplay.textContent = `Kesempatan tersisa: ${remainingTries}`;
-    hintDisplay.textContent = "Petunjuk: " + randomItem.hint;
+    triesValue.textContent = remainingTries;
+    triesBox.classList.remove("highlight");
+    hintDisplay.textContent = "💡 Petunjuk: " + wordData.hint;
+    
+    completionMessage.style.display = "none";
 
-    // Pilih 2 huruf acak yang unik sebagai hint
+    // Berikan 1-2 huruf sebagai bantuan awal
+    const hintCount = Math.min(2, Math.floor(selectedWord.length / 3));
     const hintIndices = new Set();
-    while (hintIndices.size < 2) {
+    while (hintIndices.size < hintCount) {
       hintIndices.add(Math.floor(Math.random() * selectedWord.length));
     }
     guessedLetters = [...hintIndices].map(i => selectedWord[i]);
 
     updateWordDisplay();
-    updateScore();
+    updateStats();
+    updateCategoryInfo();
+    updateProgress();
+    createLetterButtons();
+  }
+
+  function updateWordDisplay() {
+    const display = selectedWord.split('').map(l =>
+      guessedLetters.includes(l) ? l : "_"
+    ).join(" ");
+    wordDisplay.textContent = display;
+  }
+
+  function updateStats() {
+    scoreValue.textContent = score;
+    levelValue.textContent = level;
+  }
+
+  function createLetterButtons() {
     lettersContainer.innerHTML = "";
 
     for (let i = 65; i <= 90; i++) {
@@ -291,17 +557,6 @@
     }
   }
 
-  function updateWordDisplay() {
-    const display = selectedWord.split('').map(l =>
-      guessedLetters.includes(l) ? l : "_"
-    ).join(" ");
-    wordDisplay.textContent = display;
-  }
-
-  function updateScore() {
-    scoreDisplay.textContent = `Skor: ${score}`;
-  }
-
   function handleGuess(letter) {
     if (guessedLetters.includes(letter) || remainingTries === 0) return;
 
@@ -309,12 +564,18 @@
 
     if (!selectedWord.includes(letter)) {
       remainingTries--;
-      triesDisplay.textContent = `Kesempatan tersisa: ${remainingTries}`;
-      message.textContent = "Huruf salah!";
+      triesValue.textContent = remainingTries;
+      message.textContent = "❌ Huruf tidak ada!";
+      message.style.color = "#dc3545";
+      
+      if (remainingTries <= 2) {
+        triesBox.classList.add("highlight");
+      }
     } else {
-      message.textContent = "Benar!";
+      message.textContent = "✅ Benar!";
+      message.style.color = "#28a745";
       score += 10;
-      updateScore();
+      updateStats();
     }
 
     updateWordDisplay();
@@ -334,13 +595,55 @@
   function checkGameStatus() {
     const currentDisplay = wordDisplay.textContent.replace(/\s/g, "");
     if (currentDisplay === selectedWord) {
-      message.textContent = "🎉 Selamat! Kamu menang!";
+      message.textContent = "🎉 Selamat! Kamu berhasil!";
+      message.style.color = "#28a745";
+      score += remainingTries * 5; // Bonus untuk sisa kesempatan
+      completedWords++;
+      
+      if (completedWords % 3 === 0) {
+        level++;
+      }
+      
+      updateStats();
       disableAllButtons();
+      
+      // Pindah ke kata berikutnya setelah 2 detik
+      setTimeout(() => {
+        nextWord();
+      }, 2000);
+      
     } else if (remainingTries === 0) {
-      message.textContent = `😞 Kamu kalah! Kata yang benar: ${selectedWord}`;
+      message.textContent = `😞 Kata yang benar: ${selectedWord}`;
+      message.style.color = "#dc3545";
       disableAllButtons();
       revealWord();
+      
+      // Pindah ke kata berikutnya setelah 3 detik
+      setTimeout(() => {
+        nextWord();
+      }, 3000);
     }
+  }
+
+  function nextWord() {
+    const category = materiCategories[currentCategoryIndex];
+    
+    if (currentWordIndex < category.words.length - 1) {
+      currentWordIndex++;
+      initGame();
+    } else {
+      // Selesai satu kategori
+      completionMessage.style.display = "block";
+      setTimeout(() => {
+        nextCategory();
+      }, 3000);
+    }
+  }
+
+  function nextCategory() {
+    currentCategoryIndex = (currentCategoryIndex + 1) % materiCategories.length;
+    currentWordIndex = 0;
+    initGame();
   }
 
   function disableAllButtons() {
@@ -352,12 +655,26 @@
     wordDisplay.textContent = selectedWord.split('').join(" ");
   }
 
-  resetBtn.addEventListener("click", initGame);
+  // Event listeners
+  resetBtn.addEventListener("click", () => {
+    currentWordIndex = 0;
+    initGame();
+  });
 
-  // Mulai game saat pertama kali halaman dibuka
+  nextCategoryBtn.addEventListener("click", () => {
+    nextCategory();
+  });
+
+  // Inisialisasi user profile (simulasi)
+  const users = ['Ahmad', 'Siti', 'Budi', 'Rina', 'Doni', 'Maya'];
+  const randomUser = users[Math.floor(Math.random() * users.length)];
+  document.getElementById('user-greeting').textContent = `Halo, ${randomUser}!`;
+  document.getElementById('profile-pic').textContent = randomUser.charAt(0).toUpperCase();
+
+  // Mulai game
   initGame();
 
-  // Ambil username yang login dari localStorage
+   // Ambil username yang login dari localStorage
     const loggedInUser = localStorage.getItem('loggedInUser');
 
     if (loggedInUser) {
