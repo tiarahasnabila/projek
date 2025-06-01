@@ -419,10 +419,18 @@
     </ul>
 
    <div class="user-profile">
-    <span id="user-greeting">Halo,!</span>
-    <div class="profile-pic" id="profile-pic" onclick="toogleDropdown()"></div>
+  <span id="user-greeting">Halo,!</span>
+  <div class="profile-container" style="position: relative; display: inline-block;">
+    <div class="profile-pic" id="profile-pic" style="width: 40px; height: 40px; border-radius: 50%; background: #fe2bad; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+      <!-- Inisial user akan dimasukkan oleh JS -->
     </div>
-  </nav>
+    <div class="dropdown" id="profileMenu" style="display: none; position: absolute; top: 50px; right: 0; background: white; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000;">
+      <a href="profile.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333;">Lihat Profil</a>
+      <a href="logout.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333;">Logout</a>
+    </div>
+  </div>
+</div>
+</nav>
 
   <div class="container">
     <h1>🆘 Bantuan & Dukungan</h1>
@@ -649,24 +657,33 @@
           }, 150);
         });
       });
-      
+
        // Ambil username yang login dari localStorage
-    const loggedInUser = localStorage.getItem('loggedInUser');
+  const loggedInUser = localStorage.getItem('loggedInUser');
 
-    if (loggedInUser) {
-      // Update greeting
-      const greetingSpan = document.getElementById('user-greeting');
+  if (loggedInUser) {
+    // Update greeting
+    const greetingSpan = document.getElementById('user-greeting');
+    if (greetingSpan) {
       greetingSpan.textContent = `Halo, ${loggedInUser}!`;
-
-      // Update profile pic inisial (ambil huruf pertama)
-      const profilePic = document.getElementById('profile-pic');
-      profilePic.textContent = loggedInUser.charAt(0).toUpperCase();
-    } else {
-      // Kalau belum login, bisa redirect ke login page misalnya
-      window.location.href = 'login.html';
     }
 
-    });
+    // Update profile pic inisial (ambil huruf pertama)
+    const profilePic = document.getElementById('profile-pic');
+    if (profilePic) {
+      profilePic.textContent = loggedInUser.charAt(0).toUpperCase();
+     // Tambahkan klik event ke profile
+      profilePic.style.cursor = 'pointer';
+      profilePic.addEventListener('click', function () {
+        // Arahkan ke halaman profil (ubah sesuai kebutuhan)
+        window.location.href = 'profile.html';
+      });
+    }
+  } else {
+    // Kalau belum login, redirect ke login page
+    window.location.href = 'login.html';
+  }
+});
   </script>
 </body>
 </html>

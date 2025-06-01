@@ -509,11 +509,20 @@
       <li><a href="game.html" class="nav-link" onclick="navigateToPage('game')" data-page="game">Game</a></li>
       <li><a href="bantuan.html" class="nav-link" onclick="navigateToPage('bantuan')" data-page="bantuan">Bantuan</a></li>
     </ul>
-    <div class="user-profile">
-    <span id="user-greeting">Halo,!</span>
-    <div class="profile-pic" id="profile-pic">S</div>
+
+      <div class="user-profile">
+  <span id="user-greeting">Halo,!</span>
+  <div class="profile-container" style="position: relative; display: inline-block;">
+    <div class="profile-pic" id="profile-pic" style="width: 40px; height: 40px; border-radius: 50%; background: #fe2bad; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+      <!-- Inisial user akan dimasukkan oleh JS -->
     </div>
-  </nav>
+    <div class="dropdown" id="profileMenu" style="display: none; position: absolute; top: 50px; right: 0; background: white; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); z-index: 1000;">
+      <a href="profile.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333;">Lihat Profil</a>
+      <a href="logout.html" style="display: block; padding: 10px 15px; text-decoration: none; color: #333;">Logout</a>
+    </div>
+  </div>
+</div>
+</nav>
 
   <div class="container">
     <div class="breadcrumb">
@@ -523,38 +532,6 @@
     <div class="header-section">
       <h1 class="header-title">📚 Materi Edukasi Anti-Bullying</h1>
       <p>Pelajari berbagai aspek tentang bullying dan cara mengatasinya melalui materi interaktif yang mudah dipahami</p>
-    </div>
-
-    <!-- Progress Section from index.html -->
-    <div class="progress-section">
-      <h3 class="progress-title">📊 Progress Belajarmu</h3>
-      <div class="progress-item">
-        <div>
-          <strong>Materi Dasar Anti-Bullying</strong>
-          <br><small>5 dari 8 modul selesai</small>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: 62.5%"></div>
-        </div>
-      </div>
-      <div class="progress-item">
-        <div>
-          <strong>Kuis Interaktif</strong>
-          <br><small>3 dari 5 kuis selesai</small>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: 60%"></div>
-        </div>
-      </div>
-      <div class="progress-item">
-        <div>
-          <strong>Simulasi Kasus</strong>
-          <br><small>2 dari 4 simulasi selesai</small>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: 50%"></div>
-        </div>
-      </div>
     </div>
 
     <!-- Quick Actions -->
@@ -700,8 +677,8 @@
       <div class="materi-card" data-category="lanjutan">
         <div class="card-header">
           <div class="card-icon">💻</div>
-          <div class="card-title">Cyberbullying</div>
-          <div class="card-subtitle">Bullying di Era Digital</div>
+          <div class="card-title">Contoh Ilustrasi Bullying</div>
+          <div class="card-subtitle">Lingkungan Sekolah</div>
         </div>
         <div class="card-body">
           <div class="card-stats">
@@ -712,7 +689,7 @@
             <div class="progress-fill" style="width: 0%"></div>
           </div>
           <p class="card-description">
-            Pahami bentuk-bentuk cyberbullying di media sosial dan cara melindungi diri di dunia digital.
+            Pahami bentuk-bentuk bullying di sekolah dari fisik, verbal, hingga pengucilan. Yuk, jadi bagian dari lingkungan yang aman dan peduli.
           </p>
           <div class="card-buttons">
             <button class="btn btn-primary"data-modal="modal6">Mulai Belajar</button>
@@ -731,6 +708,17 @@
         <p>Pemahaman Dasar tentang Bullying</p>
       </div>
       <div class="modal-body">
+        <!-- Video Container -->
+                <div class="video-container">
+                    <video class="video-player" controls preload="metadata">
+                        <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        <!-- Fallback untuk browser yang tidak mendukung video -->
+                        <p>Browser Anda tidak mendukung pemutar video. 
+                           <a href="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4">Download video</a>
+                        </p>
+                    </video>
+                </div>
         <div class="lesson-content">
           <p>Bullying adalah perilaku agresif yang dilakukan secara berulang oleh seseorang atau sekelompok orang terhadap orang lain yang dianggap lebih lemah.</p>
           
@@ -819,6 +807,10 @@
       <p>Efek Psikologis dan Sosial</p>
     </div>
     <div class="modal-body">
+      <!-- Poster Section -->
+      <div class="poster-container" style="text-align: center; margin-bottom: 20px;">
+        <img src="assets/bullying.jpg" alt="Poster Dampak Bullying" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+      </div>
       <div class="lesson-content">
         <p>Bullying dapat meninggalkan dampak negatif yang mendalam, baik secara psikologis maupun sosial.</p>
         
@@ -911,39 +903,39 @@
   <div class="modal-content">
     <div class="modal-header">
       <button class="close-btn">&times;</button>
-      <h2>💻 Cyberbullying</h2>
-      <p>Bullying di Era Digital</p>
-    </div>
-    <div class="modal-body">
-      <div class="lesson-content">
-        <p>Cyberbullying adalah bullying yang terjadi melalui media digital seperti media sosial, pesan singkat, atau platform online lainnya.</p>
-        
-        <h3>Bentuk-bentuk Cyberbullying:</h3>
-        <ul>
-          <li>Mengirim pesan atau komentar yang menyakitkan</li>
-          <li>Menyebarkan foto atau video tanpa izin</li>
-          <li>Membuat akun palsu untuk mempermalukan orang lain</li>
-          <li>Menolak atau mengucilkan seseorang dalam grup online</li>
-        </ul>
-        
-        <h3>Cara Melindungi Diri dari Cyberbullying:</h3>
-        <ul>
-          <li>Jangan membalas atau terlibat dalam konflik online</li>
-          <li>Blokir dan laporkan pelaku ke platform terkait</li>
-          <li>Simpan bukti percakapan atau unggahan yang bullying</li>
-          <li>Beritahu orang tua, guru, atau pihak berwenang</li>
-          <li>Jaga privasi akun media sosialmu dengan baik</li>
-        </ul>
-        
-        <div class="highlight-box">
-          <strong>🔒 Keamanan digital itu penting!</strong><br>
-          Jangan ragu meminta bantuan jika kamu merasa terancam di dunia maya.
-        </div>
-      </div>
-    </div>
+      <h2>Contoh Ilustrasi Bullying di Lingkungan Sekolah</h2>
+   <h3>🧍 Ilustrasi Fisik</h3>
+    <p>
+      Dika sering dipukul pelan, dijegal saat jalan, atau didorong di lorong sekolah oleh teman sekelas. Ini membuatnya trauma dan enggan masuk kelas.
+    </p>
+
+    <h3>🗣️ Ilustrasi Verbal</h3>
+    <p>
+      Lisa dipanggil dengan julukan mengejek seperti "gendut" atau "sipit" setiap hari. Hal ini melukai perasaan dan kepercayaan dirinya.
+    </p>
+
+    <h3>🙅 Ilustrasi Sosial</h3>
+    <p>
+      Rafi tidak diajak bermain atau kerja kelompok. Teman-temannya sengaja menjauhi dan membicarakannya di belakang. Ia merasa sendirian dan tertekan.
+    </p>
+
+    <h3>⚠️ Dampak</h3>
+    <ul>
+      <li>Menurunnya semangat belajar</li>
+      <li>Perubahan emosi & isolasi sosial</li>
+      <li>Risiko gangguan kesehatan mental</li>
+    </ul>
+
+    <h3>✅ Solusi</h3>
+    <ul>
+      <li>Bicarakan kepada guru atau konselor</li>
+      <li>Jangan membiarkan bullying terjadi di depanmu</li>
+      <li>Dukung teman yang jadi korban</li>
+    </ul>
+
+    <p><strong>Ingat:</strong> Sekolah yang aman adalah tanggung jawab bersama. Jangan jadi pelaku atau penonton. Jadilah pelindung. 🙌</p>
   </div>
 </div>
-
 </div>
 
 <!-- SCRIPT JS UNTUK MODAL -->
@@ -1036,20 +1028,30 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   };
  // Ambil username yang login dari localStorage
-    const loggedInUser = localStorage.getItem('loggedInUser');
+  const loggedInUser = localStorage.getItem('loggedInUser');
 
-    if (loggedInUser) {
-      // Update greeting
-      const greetingSpan = document.getElementById('user-greeting');
+  if (loggedInUser) {
+    // Update greeting
+    const greetingSpan = document.getElementById('user-greeting');
+    if (greetingSpan) {
       greetingSpan.textContent = `Halo, ${loggedInUser}!`;
-
-      // Update profile pic inisial (ambil huruf pertama)
-      const profilePic = document.getElementById('profile-pic');
-      profilePic.textContent = loggedInUser.charAt(0).toUpperCase();
-    } else {
-      // Kalau belum login, bisa redirect ke login page misalnya
-      window.location.href = 'login.html';
     }
+
+    // Update profile pic inisial (ambil huruf pertama)
+    const profilePic = document.getElementById('profile-pic');
+    if (profilePic) {
+      profilePic.textContent = loggedInUser.charAt(0).toUpperCase();
+     // Tambahkan klik event ke profile
+      profilePic.style.cursor = 'pointer';
+      profilePic.addEventListener('click', function () {
+        // Arahkan ke halaman profil (ubah sesuai kebutuhan)
+        window.location.href = 'profile.html';
+      });
+    }
+  } else {
+    // Kalau belum login, redirect ke login page
+    window.location.href = 'login.html';
+  }
 });
 </script>
 
